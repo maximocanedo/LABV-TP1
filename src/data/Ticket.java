@@ -7,7 +7,7 @@ public abstract class Ticket {
 	
 	public static enum ShowType {
 		RECITAL,
-		THEATER,
+		THEATRE,
 		FOR_KIDS,
 		SPORTS
 	}
