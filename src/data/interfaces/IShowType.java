@@ -1,4 +1,4 @@
-package data;
+package data.interfaces;
 
 import java.util.UUID;
 
