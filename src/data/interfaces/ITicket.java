@@ -4,6 +4,12 @@ import java.util.Date;
 import java.util.UUID;
 
 public interface ITicket {
+	
+	/**
+	 * Función que calcula y actualiza la tarifa de la entrada. 
+	 * Se debe ejecutar siempre que se altere algún factor que cambie el precio de la entrada. 
+	 */
+	void updateFee();
 
 	/**
 	 * Método TOSTRING FINAL.

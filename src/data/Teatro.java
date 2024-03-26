@@ -44,4 +44,10 @@ public class Teatro extends Ticket implements ITeatro {
         };
         return super.toString(additionalLines);
     }
+
+	@Override
+	public void updateFee() {
+		// TODO Implementar
+		
+	}
 }
