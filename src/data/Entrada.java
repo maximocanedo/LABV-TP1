@@ -1,4 +1,4 @@
-package model;
+package data;
 
 public abstract class Entrada {
 	
