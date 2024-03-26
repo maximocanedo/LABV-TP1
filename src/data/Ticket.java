@@ -5,6 +5,10 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import data.interfaces.IShowType;
+import data.interfaces.ITicket;
+import lang.Messages;
+
 /**
  * Clase que representa una entrada de cualquier tipo
  * 
@@ -65,22 +69,22 @@ public abstract class Ticket implements ITicket {
 		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT);
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		
-		String ticket = "····· Entrada para show ·····\n";
+		String ticket = "····· " + Messages.getString("Ticket.HEADER_TITLE") + " ·····" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		String[] principalLines = new String[] {
-			"ID: " + this.getID(),
-			"Nombre: " + this.getName(),
-			"Tipo de show: " + this.getType().getName(),
-			"Fecha y hora de inicio: " + df.format(this.getDate()),
-			"Duración estimada: " + this.getDuration() + " m",
-			"Costo de la entrada: " + nf.format(this.getFee())
+			Messages.getString("Ticket.ID_ROW") + this.getID(), //$NON-NLS-1$
+			Messages.getString("Ticket.NAME_ROW") + this.getName(), //$NON-NLS-1$
+			Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(), //$NON-NLS-1$
+			Messages.getString("Ticket.DATE_ROW") + df.format(this.getDate()), //$NON-NLS-1$
+			Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " + Messages.getString("Ticket.MINUTES"), //$NON-NLS-1$ //$NON-NLS-2$
+			Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()) //$NON-NLS-1$
 		};
 		for(String line: principalLines) {
-			ticket += "· " + line + "\n";
+			ticket += "· " + line + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		for(String line: additionalLines) {
-			ticket += "· " + line + "\n";
+			ticket += "· " + line + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		ticket += "···············";
+		ticket += "···············"; //$NON-NLS-1$
 		return ticket;
 	}
 

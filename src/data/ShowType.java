@@ -5,6 +5,9 @@ package data;
 
 import java.util.UUID;
 
+import data.interfaces.IShowType;
+import lang.Messages;
+
 /**
  * Clase que representa los tipos de shows admitidos.
  * 
@@ -12,10 +15,10 @@ import java.util.UUID;
  */
 public class ShowType implements IShowType {
 	
-	public static final IShowType RECITAL = new ShowType("Recital", "Concierto compuesto de varias obras ejecutadas por un solo artista con un solo instrumento.");
-	public static final IShowType THEATRE = new ShowType("Teatro", "Recreación de una o varias historias de distinta índole mediante actores, discursos, música y escenografía.");
-	public static final IShowType FOR_KIDS = new ShowType("Infantil", "Shows para los más chicos. ");
-	public static final IShowType SPORTS = new ShowType("Deportivo", "Partidos de fútbol, rugby y hockey, nacionales e internacionales. ");
+	public static final IShowType RECITAL = new ShowType(Messages.getString("ShowType.RECITAL_NAME"), Messages.getString("ShowType.RECITAL_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final IShowType THEATRE = new ShowType(Messages.getString("ShowType.THEATRE_NAME"), Messages.getString("ShowType.THEATRE_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final IShowType FOR_KIDS = new ShowType(Messages.getString("ShowType.KIDS_NAME"), Messages.getString("ShowType.KIDS_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final IShowType SPORTS = new ShowType(Messages.getString("ShowType.SPORTS_NAME"), Messages.getString("ShowType.SPORTS_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	/**
 	 * ID único del registro.
@@ -41,7 +44,7 @@ public class ShowType implements IShowType {
 	}
 	
 	private ShowType(String name) {
-		this(name, "");
+		this(name, Messages.getString("ShowType.BLANK")); //$NON-NLS-1$
 	}
 
 	/* (non-Javadoc)
