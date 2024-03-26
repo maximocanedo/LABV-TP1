@@ -53,6 +53,8 @@ public abstract class Ticket implements ITicket {
 		this.setFee(fee);
 	}
 	
+	public abstract void updateFee();
+	
 	/* (non-Javadoc)
 	 * @see data.ITicket#toString()
 	 */
