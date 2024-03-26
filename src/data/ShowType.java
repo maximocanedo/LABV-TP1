@@ -34,13 +34,13 @@ public class ShowType implements IShowType {
 		this._id = UUID.randomUUID();
 	}
 	
-	public ShowType(String name, String description) {
+	private ShowType(String name, String description) {
 		this();
 		setName(name);
 		setDescription(description);
 	}
 	
-	public ShowType(String name) {
+	private ShowType(String name) {
 		this(name, "");
 	}
 
