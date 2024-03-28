@@ -47,7 +47,6 @@ public class Teatro extends Ticket implements ITeatro {
 
 	@Override
 	public void updateFee() {
-		// TODO Implementar
-		
+		setFee(1350.5);
 	}
 }
