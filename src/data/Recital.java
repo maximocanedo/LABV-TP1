@@ -60,4 +60,10 @@ public class Recital extends Ticket implements IRecital {
         };
         return super.toString(additionalLines);
     }
+
+	@Override
+	public void updateFee() {
+		// TODO Auto-generated method stub
+		
+	}
 }
