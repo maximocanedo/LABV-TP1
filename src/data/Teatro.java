@@ -13,6 +13,7 @@ public class Teatro extends Ticket implements ITeatro {
         super(name, ShowType.THEATRE, date, duration, fee);
         this.genre = genre;
         this.mainActors = mainActors;
+        updateFee();
     }
     
     @Override
@@ -47,7 +48,6 @@ public class Teatro extends Ticket implements ITeatro {
 
 	@Override
 	public void updateFee() {
-		// TODO Implementar
-		
+		setFee(1350.5);
 	}
 }

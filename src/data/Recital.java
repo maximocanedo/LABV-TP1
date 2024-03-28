@@ -12,14 +12,9 @@ public class Recital extends Ticket implements IRecital {
     private String band;
     private String genre;
     private List<String> supportBands;
+    private Boolean vip;
 
-    public Recital(String name, Date date, int duration, double fee, String band, String genre, List<String> supportBands) {
-        super(name, ShowType.RECITAL, date, duration, fee);
-        this.band = band;
-        this.genre = genre;
-        this.supportBands = supportBands;
-    }
-
+    
     @Override
     public String getBand() {
         return band;
@@ -60,10 +55,36 @@ public class Recital extends Ticket implements IRecital {
         };
         return super.toString(additionalLines);
     }
+<<<<<<< HEAD
 
 	@Override
 	public void updateFee() {
 		// TODO Auto-generated method stub
 		
+=======
+    
+    
+    
+    public Boolean getVip() {
+        return vip;
+    }
+
+    public void setVip(Boolean vip) {
+        this.vip = vip;
+    }
+    
+    public Recital(String name, Date date, int duration, double fee, String band, 
+    		String genre, List<String> supportBands, Boolean vip) {
+        super(name, ShowType.RECITAL, date, duration, fee);
+        this.band = band;
+        this.genre = genre;
+        this.supportBands = supportBands;
+        this.vip= vip;
+    }
+
+	@Override
+	public void updateFee() {
+	    setFee(this.getVip()?1500:800);
+>>>>>>> ba88aafbb65244b13e8d1e5a91c1c8ba14ec6d00
 	}
 }
