@@ -55,13 +55,6 @@ public class Recital extends Ticket implements IRecital {
         };
         return super.toString(additionalLines);
     }
-<<<<<<< HEAD
-
-	@Override
-	public void updateFee() {
-		// TODO Auto-generated method stub
-		
-=======
     
     
     
@@ -85,6 +78,5 @@ public class Recital extends Ticket implements IRecital {
 	@Override
 	public void updateFee() {
 	    setFee(this.getVip()?1500:800);
->>>>>>> ba88aafbb65244b13e8d1e5a91c1c8ba14ec6d00
 	}
 }
