@@ -6,17 +6,17 @@ import java.util.List;
 import data.interfaces.ITeatro;
 
 public class Teatro extends Ticket implements ITeatro {
-    private String genre;
-    private List<String> mainActors;
+	private String genre;
+	private List<String> mainActors;
 
-    public Teatro(String name, Date date, int duration, double fee, String genre, List<String> mainActors) {
-        super(name, ShowType.THEATRE, date, duration, fee);
-        this.genre = genre;
-        this.mainActors = mainActors;
-        updateFee();
-    }
-    
-    @Override
+	public Teatro(String name, Date date, int duration, double fee, String genre, List<String> mainActors) {
+		super(name, ShowType.THEATRE, date, duration, fee);
+		this.genre = genre;
+		this.mainActors = mainActors;
+		updateFee();
+	}
+
+	@Override
 	public String getGenre() {
 		return genre;
 	}
@@ -37,14 +37,11 @@ public class Teatro extends Ticket implements ITeatro {
 	}
 
 	@Override
-    public String toString() {
-        String mainActorsString = String.join(", ", mainActors);
-        String[] additionalLines = {
-                "Género: " + genre,
-                "Actores Principales: " + mainActorsString
-        };
-        return super.toString(additionalLines);
-    }
+	public String toString() {
+		String mainActorsString = String.join(", ", mainActors);
+		String[] additionalLines = { "Género: " + genre, "Actores Principales: " + mainActorsString };
+		return super.toString(additionalLines);
+	}
 
 	@Override
 	public void updateFee() {

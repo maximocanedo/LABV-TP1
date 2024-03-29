@@ -3,12 +3,12 @@ package data.interfaces;
 import java.util.List;
 
 public interface ITeatro {
-	
-    String getGenre();
 
-    void setGenre(String genre);
+	String getGenre();
 
-    List<String> getMainActors();
+	void setGenre(String genre);
 
-    void setMainActors(List<String> mainActors);
+	List<String> getMainActors();
+
+	void setMainActors(List<String> mainActors);
 }

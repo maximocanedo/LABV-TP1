@@ -4,15 +4,15 @@ import java.util.List;
 
 public interface IRecital {
 
-    String getBand();
+	String getBand();
 
-    void setBand(String band);
+	void setBand(String band);
 
-    String getGenre();
+	String getGenre();
 
-    void setGenre(String genre);
+	void setGenre(String genre);
 
-    List<String> getSupportBands();
+	List<String> getSupportBands();
 
-    void setSupportBands(List<String> supportBands);
+	void setSupportBands(List<String> supportBands);
 }

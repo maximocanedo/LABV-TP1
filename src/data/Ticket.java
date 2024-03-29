@@ -15,9 +15,9 @@ import lang.Messages;
  * @author Máximo Canedo
  */
 public abstract class Ticket implements ITicket {
-	
+
 	/**
-	 * ID único de la entrada. 
+	 * ID único de la entrada.
 	 */
 	private UUID _id;
 	/**
@@ -40,10 +40,11 @@ public abstract class Ticket implements ITicket {
 	 * Tarifa de la entrada.
 	 */
 	private double fee;
-	
+
 	protected Ticket() {
 		this._id = UUID.randomUUID();
 	}
+
 	protected Ticket(String name, IShowType type, Date date, int duration, double fee) {
 		this();
 		this.setName(name);
@@ -52,45 +53,50 @@ public abstract class Ticket implements ITicket {
 		this.setDuration(duration);
 		this.setFee(fee);
 	}
-	
+
 	public abstract void updateFee();
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#toString()
 	 */
 	@Override
 	public abstract String toString();
-	
+
 	/**
-	 * Método toString propio de Ticket. NO HEREDAR NI MODIFICAR.
-	 * Usar como plantilla para los .toString() de las clases heredadas.
-	 * @param additionalLines Líneas adicionales con datos propios de cada clase heredada.
-	 * @return Información del objeto en formato String y simulando un ticket. 
+	 * Método toString propio de Ticket. NO HEREDAR NI MODIFICAR. Usar como
+	 * plantilla para los .toString() de las clases heredadas.
+	 * 
+	 * @param additionalLines
+	 *            Líneas adicionales con datos propios de cada clase heredada.
+	 * @return Información del objeto en formato String y simulando un ticket.
 	 */
 	protected String toString(String[] additionalLines) {
 		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT);
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		
+
 		String ticket = "····· " + Messages.getString("Ticket.HEADER_TITLE") + " ·····" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		String[] principalLines = new String[] {
-			Messages.getString("Ticket.ID_ROW") + this.getID(), //$NON-NLS-1$
-			Messages.getString("Ticket.NAME_ROW") + this.getName(), //$NON-NLS-1$
-			Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(), //$NON-NLS-1$
-			Messages.getString("Ticket.DATE_ROW") + df.format(this.getDate()), //$NON-NLS-1$
-			Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " + Messages.getString("Ticket.MINUTES"), //$NON-NLS-1$ //$NON-NLS-2$
-			Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()) //$NON-NLS-1$
+		String[] principalLines = new String[] { Messages.getString("Ticket.ID_ROW") + this.getID(), //$NON-NLS-1$
+				Messages.getString("Ticket.NAME_ROW") + this.getName(), //$NON-NLS-1$
+				Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(), //$NON-NLS-1$
+				Messages.getString("Ticket.DATE_ROW") + df.format(this.getDate()), //$NON-NLS-1$
+				Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " //$NON-NLS-1$ //$NON-NLS-2$
+						+ Messages.getString("Ticket.MINUTES"), Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()) //$NON-NLS-2$
 		};
-		for(String line: principalLines) {
+		for (String line : principalLines) {
 			ticket += "· " + line + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		for(String line: additionalLines) {
+		for (String line : additionalLines) {
 			ticket += "· " + line + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		ticket += "···············"; //$NON-NLS-1$
 		return ticket;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#getName()
 	 */
 	@Override
@@ -98,7 +104,9 @@ public abstract class Ticket implements ITicket {
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#setName(java.lang.String)
 	 */
 	@Override
@@ -106,7 +114,9 @@ public abstract class Ticket implements ITicket {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#getType()
 	 */
 	@Override
@@ -114,7 +124,9 @@ public abstract class Ticket implements ITicket {
 		return type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#setType(data.IShowType)
 	 */
 	@Override
@@ -122,7 +134,9 @@ public abstract class Ticket implements ITicket {
 		this.type = type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#getDate()
 	 */
 	@Override
@@ -130,7 +144,9 @@ public abstract class Ticket implements ITicket {
 		return date;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#setDate(java.util.Date)
 	 */
 	@Override
@@ -138,7 +154,9 @@ public abstract class Ticket implements ITicket {
 		this.date = date;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#getDuration()
 	 */
 	@Override
@@ -146,7 +164,9 @@ public abstract class Ticket implements ITicket {
 		return duration;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#setDuration(int)
 	 */
 	@Override
@@ -154,7 +174,9 @@ public abstract class Ticket implements ITicket {
 		this.duration = duration;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#getFee()
 	 */
 	@Override
@@ -165,14 +187,19 @@ public abstract class Ticket implements ITicket {
 	/**
 	 * Establecer la tarifa de la entrada.
 	 * 
-	 * Este método es protegido y no se debe crear un método público en cualquiera de las clases hijas.
-	 * @param fee the fee to set
+	 * Este método es protegido y no se debe crear un método público en cualquiera
+	 * de las clases hijas.
+	 * 
+	 * @param fee
+	 *            the fee to set
 	 */
 	protected void setFee(double fee) {
 		this.fee = fee;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.ITicket#getID()
 	 */
 	@Override
