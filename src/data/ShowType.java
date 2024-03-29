@@ -14,12 +14,16 @@ import lang.Messages;
  * @author Máximo Canedo
  */
 public class ShowType implements IShowType {
-	
-	public static final IShowType RECITAL = new ShowType(Messages.getString("ShowType.RECITAL_NAME"), Messages.getString("ShowType.RECITAL_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
-	public static final IShowType THEATRE = new ShowType(Messages.getString("ShowType.THEATRE_NAME"), Messages.getString("ShowType.THEATRE_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
-	public static final IShowType FOR_KIDS = new ShowType(Messages.getString("ShowType.KIDS_NAME"), Messages.getString("ShowType.KIDS_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
-	public static final IShowType SPORTS = new ShowType(Messages.getString("ShowType.SPORTS_NAME"), Messages.getString("ShowType.SPORTS_DESCRIPTION")); //$NON-NLS-1$ //$NON-NLS-2$
-	
+
+	public static final IShowType RECITAL = new ShowType(Messages.getString("ShowType.RECITAL_NAME"), //$NON-NLS-1$
+			Messages.getString("ShowType.RECITAL_DESCRIPTION")); //$NON-NLS-1$
+	public static final IShowType THEATRE = new ShowType(Messages.getString("ShowType.THEATRE_NAME"), //$NON-NLS-1$
+			Messages.getString("ShowType.THEATRE_DESCRIPTION")); //$NON-NLS-1$
+	public static final IShowType FOR_KIDS = new ShowType(Messages.getString("ShowType.KIDS_NAME"), //$NON-NLS-1$
+			Messages.getString("ShowType.KIDS_DESCRIPTION")); //$NON-NLS-1$
+	public static final IShowType SPORTS = new ShowType(Messages.getString("ShowType.SPORTS_NAME"), //$NON-NLS-1$
+			Messages.getString("ShowType.SPORTS_DESCRIPTION")); //$NON-NLS-1$
+
 	/**
 	 * ID único del registro.
 	 */
@@ -36,18 +40,20 @@ public class ShowType implements IShowType {
 	private ShowType() {
 		this._id = UUID.randomUUID();
 	}
-	
+
 	private ShowType(String name, String description) {
 		this();
 		setName(name);
 		setDescription(description);
 	}
-	
+
 	private ShowType(String name) {
 		this(name, Messages.getString("ShowType.BLANK")); //$NON-NLS-1$
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.IShowType#getName()
 	 */
 	@Override
@@ -59,7 +65,9 @@ public class ShowType implements IShowType {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.IShowType#getDescription()
 	 */
 	@Override
@@ -71,7 +79,9 @@ public class ShowType implements IShowType {
 		this.description = description;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see data.IShowType#getID()
 	 */
 	@Override
@@ -79,5 +89,4 @@ public class ShowType implements IShowType {
 		return _id;
 	}
 
-	
 }
