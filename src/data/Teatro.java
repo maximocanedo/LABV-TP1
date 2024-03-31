@@ -7,9 +7,9 @@ import data.interfaces.ITeatro;
 
 public class Teatro extends Ticket implements ITeatro {
 	private String genre;
-	private List<String> mainActors;
+	private String[] mainActors = new String[3];
 
-	public Teatro(String name, Date date, int duration, double fee, String genre, List<String> mainActors) {
+	public Teatro(String name, Date date, int duration, double fee, String genre, String[] mainActors) {
 		super(name, ShowType.THEATRE, date, duration, fee);
 		this.genre = genre;
 		this.mainActors = mainActors;
@@ -27,12 +27,12 @@ public class Teatro extends Ticket implements ITeatro {
 	}
 
 	@Override
-	public List<String> getMainActors() {
+	public String[] getMainActors() {
 		return mainActors;
 	}
 
 	@Override
-	public void setMainActors(List<String> mainActors) {
+	public void setMainActors(String[] mainActors) {
 		this.mainActors = mainActors;
 	}
 

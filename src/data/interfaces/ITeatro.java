@@ -8,7 +8,7 @@ public interface ITeatro {
 
 	void setGenre(String genre);
 
-	List<String> getMainActors();
+	String[] getMainActors();
 
-	void setMainActors(List<String> mainActors);
+	void setMainActors(String[] mainActors);
 }
