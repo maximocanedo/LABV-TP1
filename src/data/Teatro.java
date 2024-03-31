@@ -13,6 +13,7 @@ public class Teatro extends Ticket implements ITeatro {
 		super(name, ShowType.THEATRE, date, duration, fee);
 		this.genre = genre;
 		this.mainActors = mainActors;
+		updateFee();
 	}
 
 	@Override
