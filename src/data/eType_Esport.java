@@ -1,13 +1,13 @@
 package data;
 
-public enum eType_Eport {
+public enum eType_Esport {
 	futbol("futbol"),
 	rugby("rugby"),
 	hockey("hockey");
 	
 	private final String descripcion;
 
-	eType_Eport(String descripcion) {
+	eType_Esport(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -15,6 +15,4 @@ public enum eType_Eport {
     public String toString() {
         return descripcion;
     }
-    
-    
 }

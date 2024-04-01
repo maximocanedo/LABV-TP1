@@ -8,24 +8,17 @@ import data.interfaces.Ideportes;
 
 public class deportes extends Ticket implements Ideportes {
 
-private String sport_name;
 private List<String> Equipment;
-private eType_Eport Type_Eport;
+private eType_Esport eType_Esport;
 private eClassification classification;
 
-public deportes(String name, IShowType type, Date date, int duration, double fee,String sport_name, List<String> equipment, eType_Eport type_Eport, eClassification classification) {
+public deportes(String name, IShowType type, Date date, int duration, double fee, List<String> equipment, eType_Esport eType_Esport, eClassification classification) {
 	super(name,type,date,duration,fee);
-	this.sport_name = sport_name;
-	Equipment = equipment;
-	Type_Eport = type_Eport;
+	this.Equipment = equipment;
+	this.eType_Esport = eType_Esport;
 	this.classification = classification;
 }
-public String getSport_name() {
-	return sport_name;
-}
-public void setSport_name(String sport_name) {
-	this.sport_name = sport_name;
-}
+
 public List<String> getEquipment() {
 	return Equipment;
 }
@@ -33,11 +26,11 @@ public void setEquipment(List<String> equipment) {
 	Equipment = equipment;
 }
 
-public eType_Eport getType_Eport() {
-	return Type_Eport;
+public eType_Esport getType_Eport() {
+	return eType_Esport;
 }
-public void setType_Eport(eType_Eport type_Eport) {
-	Type_Eport = type_Eport;
+public void setType_Eport(eType_Esport eType_Esport) {
+	this.eType_Esport = eType_Esport;
 }
 public eClassification getClassification1() {
 	return classification;
@@ -47,13 +40,13 @@ public void setClassification(eClassification classification) {
 }
 @Override
 public String toString() {
-	return "deporte:" + sport_name + ", Equipo:" + Equipment +"clasificacion:"+ classification + "Tipo de deporte:" + Type_Eport;
+	return "Equipo:" + Equipment +"clasificacion:"+ classification + "Tipo de deporte:" + eType_Esport;
 }
 
 public void updateFee() {
 	// TODO Auto-generated method stub
 	double free=0;
-	switch (this.Type_Eport) {
+	switch (this.eType_Esport) {
     case futbol:
     	free= 300;
         break;
