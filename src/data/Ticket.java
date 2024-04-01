@@ -89,7 +89,10 @@ public abstract class Ticket implements ITicket {
 		for (String line : additionalLines) {
 			ticket += "· " + line + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		ticket += "···············"; //$NON-NLS-1$
+		ticket += "············"; //$NON-NLS-1$
+		for(int i = 0; i < Messages.getString("Ticket.HEADER_TITLE").length(); i++) {
+			ticket += "·";
+		}
 		return ticket;
 	}
 
