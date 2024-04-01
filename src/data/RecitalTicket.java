@@ -3,12 +3,12 @@ package data;
 import java.util.Date;
 import java.util.List;
 
-import data.interfaces.IRecital;
+import data.interfaces.IRecitalTicket;
 
 /*  Clase Recital que representa a Ticket de tipo Recital
  *  @author pato
  */
-public class Recital extends Ticket implements IRecital {
+public class RecitalTicket extends Ticket implements IRecitalTicket {
 
 	private String band;
 	private String genre;
@@ -61,7 +61,7 @@ public class Recital extends Ticket implements IRecital {
 		this.vip = vip;
 	}
 
-	public Recital(String name, Date date, int duration, String band, String genre,
+	public RecitalTicket(String name, Date date, int duration, String band, String genre,
 			List<String> supportBands, Boolean vip) {
 		super(name, ShowType.RECITAL, date, duration);
 		this.band = band;

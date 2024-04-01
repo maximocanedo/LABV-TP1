@@ -2,7 +2,7 @@ package data.interfaces;
 
 import java.util.List;
 
-public interface ITeatro {
+public interface ITheatreTicket {
 
 	String getGenre();
 

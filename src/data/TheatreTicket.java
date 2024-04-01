@@ -2,13 +2,13 @@ package data;
 
 import java.util.Date;
 
-import data.interfaces.ITeatro;
+import data.interfaces.ITheatreTicket;
 
-public class Teatro extends Ticket implements ITeatro {
+public class TheatreTicket extends Ticket implements ITheatreTicket {
 	private String genre;
 	private String[] mainActors = new String[3];
 
-	public Teatro(String name, Date date, int duration, String genre, String[] mainActors) {
+	public TheatreTicket(String name, Date date, int duration, String genre, String[] mainActors) {
 		super(name, ShowType.THEATRE, date, duration);
 		this.genre = genre;
 		this.mainActors = mainActors;
