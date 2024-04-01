@@ -3,6 +3,7 @@ package data;
 import java.util.Date;
 
 import data.interfaces.ITheatreTicket;
+import lang.Messages;
 
 public class TheatreTicket extends Ticket implements ITheatreTicket {
 	private String genre;
@@ -37,8 +38,8 @@ public class TheatreTicket extends Ticket implements ITheatreTicket {
 
 	@Override
 	public String toString() {
-		String mainActorsString = String.join(", ", mainActors);
-		String[] additionalLines = { "Género: " + genre, "Actores Principales: " + mainActorsString };
+		String mainActorsString = String.join(", ", mainActors); //$NON-NLS-1$
+		String[] additionalLines = { Messages.getString("TheatreTicket.Genre") + genre, Messages.getString("TheatreTicket.Cast") + mainActorsString }; //$NON-NLS-1$ //$NON-NLS-2$
 		return super.toString(additionalLines);
 	}
 
