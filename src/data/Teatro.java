@@ -1,7 +1,6 @@
 package data;
 
 import java.util.Date;
-import java.util.List;
 
 import data.interfaces.ITeatro;
 
@@ -9,11 +8,11 @@ public class Teatro extends Ticket implements ITeatro {
 	private String genre;
 	private String[] mainActors = new String[3];
 
-	public Teatro(String name, Date date, int duration, double fee, String genre, String[] mainActors) {
-		super(name, ShowType.THEATRE, date, duration, fee);
+	public Teatro(String name, Date date, int duration, String genre, String[] mainActors) {
+		super(name, ShowType.THEATRE, date, duration);
 		this.genre = genre;
 		this.mainActors = mainActors;
-		updateFee();
+		this.updateFee();
 	}
 
 	@Override

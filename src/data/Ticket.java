@@ -39,19 +39,18 @@ public abstract class Ticket implements ITicket {
 	/**
 	 * Tarifa de la entrada.
 	 */
-	private double fee;
+	private double fee = 0;
 
 	protected Ticket() {
 		this._id = UUID.randomUUID();
 	}
 
-	protected Ticket(String name, IShowType type, Date date, int duration, double fee) {
+	protected Ticket(String name, IShowType type, Date date, int duration) {
 		this();
 		this.setName(name);
 		this.setType(type);
 		this.setDate(date);
 		this.setDuration(duration);
-		this.setFee(fee);
 	}
 
 	public abstract void updateFee();

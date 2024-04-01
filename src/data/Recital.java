@@ -61,13 +61,14 @@ public class Recital extends Ticket implements IRecital {
 		this.vip = vip;
 	}
 
-	public Recital(String name, Date date, int duration, double fee, String band, String genre,
+	public Recital(String name, Date date, int duration, String band, String genre,
 			List<String> supportBands, Boolean vip) {
-		super(name, ShowType.RECITAL, date, duration, fee);
+		super(name, ShowType.RECITAL, date, duration);
 		this.band = band;
 		this.genre = genre;
 		this.supportBands = supportBands;
 		this.vip = vip;
+		this.updateFee();
 	}
 
 	@Override

@@ -14,13 +14,14 @@ public class deportes extends Ticket implements Ideportes {
 	private eType_Eport Type_Eport;
 	private eClassification classification;
 
-	public deportes(String name, IShowType type, Date date, int duration, double fee, String sport_name,
+	public deportes(String name, IShowType type, Date date, int duration, String sport_name,
 			List<String> equipment, eType_Eport type_Eport, eClassification classification) {
-		super(name, type, date, duration, fee);
+		super(name, type, date, duration);
 		this.sport_name = sport_name;
 		Equipment = equipment;
 		Type_Eport = type_Eport;
 		this.classification = classification;
+		this.updateFee();
 	}
 
 	public String getSport_name() {
