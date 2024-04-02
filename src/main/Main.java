@@ -1,39 +1,49 @@
 package main;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import data.RecitalTicket;
-import data.TheatreTicket;
+import data.*;
 
 public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("Trabajo Práctico N.º 1 · Laboratorio de Computación IV");
-		// Recital No VIP
-		List<String> bandasSoporte = new ArrayList<String>(Arrays.asList("Guns & Roses"));
-		LocalDate fecha = LocalDate.of(2024, 5, 5);
-		Date date = Date.from(fecha.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-		RecitalTicket entradaRecital = new RecitalTicket("ACDC - Tour History", date, 120, "ACDC", "Rock",
-				bandasSoporte, false);
-		entradaRecital.toString();
-		// Recital VIP
-		bandasSoporte = new ArrayList<String>(Arrays.asList("Guns & Roses", "The Clash"));
-		fecha = LocalDate.of(2024, 8, 12);
-		date = Date.from(fecha.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-		RecitalTicket entradaRecitalVip = new RecitalTicket("ACDC - Tour History", date, 159, "ACDC", "Rock",
-				bandasSoporte, true);
-		entradaRecitalVip.toString();
-		// Teatro
-		String[] actoresPrincipales = new String[] {"Leonardo Di Caprio", "Johnny Deep", "Diego Pereti"};
-		fecha = LocalDate.of(2024, 12, 6);
-		date = Date.from(fecha.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-		TheatreTicket entradaTeatro = new TheatreTicket("Los Autenticos", date, 136, "comedia", actoresPrincipales);
-		entradaTeatro.toString();
+		
+		ArrayList<String> recitalBandasDeSoporte = new ArrayList<String>(Arrays.asList("Guns & Roses", "The Clash"));
+		String[] teatroActoresPrincipales = new String[] { "Leonardo Di Caprio", "Johnny Deep", "Diego Pereti" };
+		
+		Date[] fechas = new Date[] {
+			getDateOf(2024, 5, 5, 18, 0),
+			getDateOf(2024, 12, 6, 18, 0)
+		};
+	
+		Ticket[] tickets = new Ticket[] {
+			// Entradas para recitales. No VIP y VIP.
+			new RecitalTicket("ACDC - Tour History", fechas[0], 120, "ACDC", "Rock", recitalBandasDeSoporte, false),
+			new RecitalTicket("ACDC - Tour History", fechas[0], 120, "ACDC", "Rock", recitalBandasDeSoporte, true),
+			// Teatro
+			new TheatreTicket("Los Auténticos", fechas[1], 136, "Comedia", teatroActoresPrincipales)
+		};
+		
+		for(Ticket ticket : tickets) 
+			System.out.println(ticket);
+		
+	}
+	
+	public static Date getDateOf(int year, int month, int day, int hours, int minutes) {
+		return Date.from(
+				LocalDate
+					.of(year, month, day)
+					.atTime(LocalTime.of(hours, minutes))
+					.atZone(ZoneId.systemDefault())
+					.toInstant()
+				);
 	}
 
 }
