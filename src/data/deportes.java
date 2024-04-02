@@ -10,13 +10,11 @@ public class deportes extends Ticket implements Ideportes {
 
 private List<String> Equipment;
 private eType_Esport eType_Esport;
-private eClassification classification;
 
 public deportes(String name, IShowType type, Date date, int duration, double fee, List<String> equipment, eType_Esport eType_Esport, eClassification classification) {
 	super(name,type,date,duration,fee);
 	this.Equipment = equipment;
 	this.eType_Esport = eType_Esport;
-	this.classification = classification;
 }
 
 public List<String> getEquipment() {
