@@ -1,6 +1,7 @@
 package data;
 
 import data.interfaces.IKids;
+import lang.Messages;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ public class Kids implements IKids{
 	
 	//private String[] mensaje_souvenir = {"GRACIAS POR VENIR A ", ". EL DIA ", " - TENES TUS FOTOS CARGADAS EN WWWW.TICKETSHOW.COM"};
 
-	private String [] mensaje_souvenir = {null, "Souvenir: incluye"};
+	private String [] mensaje_souvenir = {null, Messages.getString("Kids.WithSouvenir")}; //$NON-NLS-1$
 	
 	public Kids (String name, Date date, int edad) {
 		
