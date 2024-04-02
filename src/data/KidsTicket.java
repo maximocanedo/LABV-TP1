@@ -8,32 +8,21 @@ public class KidsTicket extends Ticket {
 	
 	public final Kids info;
 	
-	private final String souvenir;
 	
-	public KidsTicket (String name, IShowType type, Date date, int duration, boolean edad) {
+	public KidsTicket (String name, Date date, int duration, int edad) {
 		
-		super(name, type, date, duration);
+		super(name, ShowType.FOR_KIDS, date, duration);
 		
 		info = new Kids(name, date, edad);
 		
 		updateFee();
 		
-		souvenir = "GRACIAS POR VENIR A " + name + ". EL DIA " + date;
-		
 	}
 	
-	public KidsTicket (String name, IShowType type, Date date, int duration, boolean edad, boolean extra) {
-		
-		super(name, type, date, duration);
-			
+	public KidsTicket (String name, Date date, int duration, int edad, boolean extra) {
+		super(name, ShowType.FOR_KIDS, date, duration);
 		info = new Kids(name, date, edad, extra);
-		
 		updateFee();
-		
-		if(!extra)
-			souvenir = "GRACIAS POR VENIR A " + name + ". EL DIA " + date;
-		else
-			souvenir = "GRACIAS POR VENIR A " + name + "\n" +  "EL DIA " +  date + "\n" + "TENES TUS FOTOS CARGADAS EN WWWW.TICKETSHOW.COM";
 	}
 	
 	@Override

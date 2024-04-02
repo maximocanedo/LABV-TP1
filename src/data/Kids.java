@@ -23,9 +23,9 @@ public class Kids implements IKids{
 
 	private String [] mensaje_souvenir = {null, "Souvenir: incluye"};
 	
-	public Kids (String name, Date date, boolean edad) {
+	public Kids (String name, Date date, int edad) {
 		
-		if(!edad)
+		if(edad < 8)
 			valor = valor_entrada[0];
 		else
 			valor = valor_entrada[1];
@@ -34,9 +34,9 @@ public class Kids implements IKids{
 		
 	}
 
-	public Kids (String name, Date date, boolean edad, boolean souvenir) {
+	public Kids (String name, Date date, int edad, boolean souvenir) {
 		
-		if(!edad)
+		if(edad < 8)
 			valor = valor_entrada[0];
 		else
 			valor = valor_entrada[1];
