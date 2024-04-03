@@ -14,9 +14,9 @@ public class SportsTicket extends Ticket implements ISportsTicket {
 	private Sport sport;
 	private SportClassification classification;
 
-	public SportsTicket(String name, IShowType type, Date date, int duration, String sport_name,
+	public SportsTicket(String name, Date date, int duration, String sport_name,
 			List<String> equipment, Sport type_Eport, SportClassification classification) {
-		super(name, type, date, duration);
+		super(name, ShowType.SPORTS, date, duration);
 		this.sportName = sport_name;
 		this.equipment.addAll(equipment);
 		this.sport = type_Eport;
