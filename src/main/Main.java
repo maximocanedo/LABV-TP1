@@ -26,7 +26,9 @@ public class Main {
 			getDateOf(2024, 9, 16, 16, 0),
 			getDateOf(2024, 6, 20, 19, 0),
 			getDateOf(2024, 9, 5, 10, 0),
-			getDateOf(2024, 10, 10, 10, 0)
+			getDateOf(2025, 10, 10, 10, 0),
+			getDateOf(2026, 10, 10, 10, 0),
+			getDateOf(2027, 10, 10, 10, 0)
 		};
 	
 		Ticket[] tickets = new Ticket[] {
@@ -41,7 +43,12 @@ public class Main {
 			new KidsTicket("TECNOPOLIS - ALGO PARA RECORDAR", fechas[3] , 60, 9),
 			new KidsTicket("COCINA COMO MAMI EN CASA - NIÑOS/AS COLEGIO SAN ESTEBAN", fechas[4], 30, 5),
 			// Eventos deportivos
-			new SportsTicket("Evento deportivo", fechas[5], 120, "Deporte", equipment, Sport.futbol, SportClassification.internacional)
+			new SportsTicket("Fútbol internacional", fechas[5], 120, "Deporte", equipment, Sport.futbol, SportClassification.internacional),
+			new SportsTicket("Rugby internacional", fechas[6], 120, "Deporte", equipment, Sport.rugby, SportClassification.internacional),
+			new SportsTicket("Hockey internacional", fechas[7], 120, "Deporte", equipment, Sport.hockey, SportClassification.internacional),
+			new SportsTicket("Fútbol nacional", fechas[5], 120, "Deporte", equipment, Sport.futbol, SportClassification.nacional),
+			new SportsTicket("Rugby nacional", fechas[6], 120, "Deporte", equipment, Sport.rugby, SportClassification.nacional),
+			new SportsTicket("Hockey nacional", fechas[7], 120, "Deporte", equipment, Sport.hockey, SportClassification.nacional)
 			// 
 		};
 		
