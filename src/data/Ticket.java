@@ -8,6 +8,7 @@ import java.util.UUID;
 import data.interfaces.IShowType;
 import data.interfaces.ITicket;
 import lang.Messages;
+import utils.DelimiterLine;
 
 /**
  * Clase que representa una entrada de cualquier tipo
@@ -72,28 +73,52 @@ public abstract class Ticket implements ITicket {
 	 * @return Información del objeto en formato String y simulando un ticket.
 	 */
 	protected String toString(String[] additionalLines) {
+		
+		// Formateadores
 		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT);
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-
-		String ticket = "····· " + Messages.getString("Ticket.HEADER_TITLE") + " ·····" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		String[] principalLines = new String[] { Messages.getString("Ticket.ID_ROW") + this.getID(), //$NON-NLS-1$
-				Messages.getString("Ticket.NAME_ROW") + this.getName(), //$NON-NLS-1$
-				Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(), //$NON-NLS-1$
-				Messages.getString("Ticket.DATE_ROW") + df.format(this.getDate()), //$NON-NLS-1$
-				Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " //$NON-NLS-1$ //$NON-NLS-2$
-						+ Messages.getString("Ticket.MINUTES"), Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()) //$NON-NLS-2$
+		
+		// Cabecera del ticket
+		DelimiterLine header = new DelimiterLine(Messages.getString("Ticket.HEADER_TITLE"));
+		header.setTopHeader(true);
+		header.setAlignment(DelimiterLine.Alignment.CENTER);
+		
+		// Inicializar el ticket
+		String ticket = header.toString();
+		
+		// Línea del total
+		DelimiterLine feeLine = new DelimiterLine(Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()));
+		feeLine.setAlignment(DelimiterLine.Alignment.RIGHT);
+		
+		// Líneas principales. Estas aparecen justo bajo la cabecera.
+		String[] principalLines = new String[] { 
+				Messages.getString("Ticket.ID_ROW") + this.getID(),
+				Messages.getString("Ticket.NAME_ROW") + this.getName(),
+				Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(),
+				Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " + Messages.getString("Ticket.MINUTES")
 		};
 		for (String line : principalLines) {
-			ticket += "· " + line + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			DelimiterLine dl = new DelimiterLine(line);
+			ticket += dl.toString();
 		}
+		
+		// Agregar líneas adicionales.
 		for (String line : additionalLines) {
 			if(line == null) continue;
-			ticket += "· " + line + "\n";
+			ticket += new DelimiterLine(line).toString();
 		}
-		ticket += "············"; //$NON-NLS-1$
-		for(int i = 0; i < Messages.getString("Ticket.HEADER_TITLE").length(); i++) {
-			ticket += "·";
-		}
+		
+		// Agregar línea en blanco y línea de la tarifa.
+		ticket += DelimiterLine.BLANK.toString();
+		ticket += feeLine.toString();
+		
+		// Agregar footer con la fecha y hora de inicio.
+		DelimiterLine end = new DelimiterLine(df.format(this.getDate()));
+		end.setAlignment(DelimiterLine.Alignment.CENTER);
+		end.setBottomHeader(true);
+		ticket += end.toString();
+		
+		
 		return ticket;
 	}
 

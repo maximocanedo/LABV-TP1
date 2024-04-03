@@ -1,20 +1,21 @@
 package utils;
 
-public class DelimiterLine {	
+public class DelimiterLine {
+	public static DelimiterLine BLANK = new DelimiterLine("");
 	public static enum Alignment { LEFT, CENTER, RIGHT };
 	private String leftDelimiter = "|";
 	private String rightDelimiter = "|";
-	private int padding = 1;
-	private int lineSize = 40;
+	private int padding = 2;
+	private int lineSize = 48;
 	private String content;
 	private boolean isTopHeader = false;
 	private boolean isBottomHeader = false;
-	private char topLeftDelimiter = '·';
-	private char topRightDelimiter = '·';
-	private char bottomLeftDelimiter = '·';
-	private char bottomRightDelimiter = '·';
-	private char topHeaderMiddleDelimiter = '—';
-	private char bottomHeaderMiddleDelimiter = '—';
+	private char topLeftDelimiter = 'Â·';
+	private char topRightDelimiter = 'Â·';
+	private char bottomLeftDelimiter = 'Â·';
+	private char bottomRightDelimiter = 'Â·';
+	private char topHeaderMiddleDelimiter = 'â€”';
+	private char bottomHeaderMiddleDelimiter = 'â€”';
 	private Alignment alignment = Alignment.LEFT;
 
 	public DelimiterLine(String content) {
