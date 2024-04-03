@@ -8,7 +8,7 @@ import java.util.UUID;
 import data.interfaces.IShowType;
 import data.interfaces.ITicket;
 import lang.Messages;
-import utils.DelimiterLine;
+import utils.FormattedLine;
 
 /**
  * Clase que representa una entrada de cualquier tipo
@@ -79,16 +79,16 @@ public abstract class Ticket implements ITicket {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		
 		// Cabecera del ticket
-		DelimiterLine header = new DelimiterLine(Messages.getString("Ticket.HEADER_TITLE"));
+		FormattedLine header = new FormattedLine(Messages.getString("Ticket.HEADER_TITLE"));
 		header.setTopHeader(true);
-		header.setAlignment(DelimiterLine.Alignment.CENTER);
+		header.setAlignment(FormattedLine.Alignment.CENTER);
 		
 		// Inicializar el ticket
 		String ticket = header.toString();
 		
 		// Línea del total
-		DelimiterLine feeLine = new DelimiterLine(Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()));
-		feeLine.setAlignment(DelimiterLine.Alignment.RIGHT);
+		FormattedLine feeLine = new FormattedLine(Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()));
+		feeLine.setAlignment(FormattedLine.Alignment.RIGHT);
 		
 		// Líneas principales. Estas aparecen justo bajo la cabecera.
 		String[] principalLines = new String[] { 
@@ -98,23 +98,23 @@ public abstract class Ticket implements ITicket {
 				Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " + Messages.getString("Ticket.MINUTES")
 		};
 		for (String line : principalLines) {
-			DelimiterLine dl = new DelimiterLine(line);
+			FormattedLine dl = new FormattedLine(line);
 			ticket += dl.toString();
 		}
 		
 		// Agregar líneas adicionales.
 		for (String line : additionalLines) {
 			if(line == null) continue;
-			ticket += new DelimiterLine(line).toString();
+			ticket += new FormattedLine(line).toString();
 		}
 		
 		// Agregar línea en blanco y línea de la tarifa.
-		ticket += DelimiterLine.BLANK.toString();
+		ticket += FormattedLine.BLANK.toString();
 		ticket += feeLine.toString();
 		
 		// Agregar footer con la fecha y hora de inicio.
-		DelimiterLine end = new DelimiterLine(df.format(this.getDate()));
-		end.setAlignment(DelimiterLine.Alignment.CENTER);
+		FormattedLine end = new FormattedLine(df.format(this.getDate()));
+		end.setAlignment(FormattedLine.Alignment.CENTER);
 		end.setBottomHeader(true);
 		ticket += end.toString();
 		

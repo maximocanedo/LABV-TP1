@@ -7,15 +7,15 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		DelimiterLine h = new DelimiterLine("Lorem ipsume");
+		FormattedLine h = new FormattedLine("Lorem ipsume");
 		h.setTopHeader(true);
-		h.setAlignment(DelimiterLine.Alignment.CENTER);
-		DelimiterLine n = new DelimiterLine("");
+		h.setAlignment(FormattedLine.Alignment.CENTER);
+		FormattedLine n = new FormattedLine("");
 		n.setBottomHeader(true);
-		DelimiterLine dl = new DelimiterLine(
+		FormattedLine dl = new FormattedLine(
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut commodo sapien. Maecenas scelerisque quis dolor ac volutpat. Sed dapibus enim at fringilla iaculis. Curabitur et ornare urna. Pellentesque et quam vulputate, euismod libero vel, ultrices elit. Vestibulum venenatis ligula at augue gravida, ac vulputate nulla eleifend. Pellentesque a urna eu mi porttitor hendrerit eget eu augue. Sed sit amet scelerisque elit. Cras luctus interdum neque."
 		);
-		dl.setAlignment(DelimiterLine.Alignment.RIGHT);
+		dl.setAlignment(FormattedLine.Alignment.RIGHT);
 		System.out.print(h);
 		System.out.print(dl);
 		System.out.print(n);

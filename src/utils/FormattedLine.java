@@ -1,7 +1,7 @@
 package utils;
 
-public class DelimiterLine {
-	public static DelimiterLine BLANK = new DelimiterLine("");
+public class FormattedLine {
+	public static FormattedLine BLANK = new FormattedLine("");
 	public static enum Alignment { LEFT, CENTER, RIGHT };
 	private String leftDelimiter = "|";
 	private String rightDelimiter = "|";
@@ -18,7 +18,7 @@ public class DelimiterLine {
 	private char bottomHeaderMiddleDelimiter = '—';
 	private Alignment alignment = Alignment.LEFT;
 
-	public DelimiterLine(String content) {
+	public FormattedLine(String content) {
 		this.setContent(content);
 	}
 	
