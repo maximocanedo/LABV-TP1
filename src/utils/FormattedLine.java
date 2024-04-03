@@ -1,8 +1,47 @@
 package utils;
 
-public class FormattedLine {
-	public static FormattedLine BLANK = new FormattedLine("");
-	public static enum Alignment { LEFT, CENTER, RIGHT };
+import java.util.ArrayList;
+import java.util.List;
+
+public class FormattedLine implements IFormattedLine {
+	/**
+	 * Línea en blanco.
+	 */
+	public static IFormattedLine BLANK = new FormattedLine("");
+	/**
+	 * Tipos de alineamiento de texto disponibles
+	 */
+	public static enum Alignment {
+		/**
+		 * Alinear a la izquierda.
+		 */
+		LEFT, 
+		/**
+		 * Alinear al centro.
+		 */
+		CENTER, 
+		/**
+		 * Alinear a la derecha.
+		 */
+		RIGHT 
+	};
+	/**
+	 * Tipos de wrapping disponibles.
+	 */
+	public static enum Wrap { 
+		/**
+		 * No cortar palabras.
+		 * 
+		 * Si una palabra no entra en una línea, se la omite y escribe en la siguiente.
+		 */
+		NO_WRAP, 
+		/**
+		 * Cortar palabras de ser necesario.
+		 * 
+		 * Si una palabra no entra, imprimir la parte de la palabra que quepe y el resto en la siguiente línea.
+		 */
+		WRAP_WORDS 
+	};
 	private String leftDelimiter = "|";
 	private String rightDelimiter = "|";
 	private int padding = 2;
@@ -17,24 +56,59 @@ public class FormattedLine {
 	private char topHeaderMiddleDelimiter = '—';
 	private char bottomHeaderMiddleDelimiter = '—';
 	private Alignment alignment = Alignment.LEFT;
+	private Wrap wrap = Wrap.NO_WRAP;
+	private boolean indent = false;
+	
 
 	public FormattedLine(String content) {
 		this.setContent(content);
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getLines()
+	 */
+	@Override
+	public String[] getLines() {
+		String content = this.getContent();
+		if(this.indent) content = "   " + content; 
+		int size = this.getLineSize();
+	    List<String> lines = new ArrayList<String>();
+		for(int i = 0; i < content.length(); i++) {
+			int endIndex = Math.min(i + size, content.length());
+			int newLineIndex = content.indexOf('\n', i);
+			int nextIndex = ((newLineIndex != -1 && newLineIndex < endIndex) ? newLineIndex : endIndex);
+			int endingIndex = (newLineIndex != -1 && newLineIndex < endIndex) ? newLineIndex : (endIndex - 1);
+			if(this.wrap == Wrap.NO_WRAP) {
+				int lastSpaceIndex = content.lastIndexOf(' ', endingIndex);
+	            if (lastSpaceIndex != -1 && lastSpaceIndex >= i) {
+	                nextIndex = lastSpaceIndex + 1;
+	                endingIndex = lastSpaceIndex; 
+	            }
+			} 
+			lines.add(content.substring(i, nextIndex));
+			i = endingIndex;
+		}
+		return lines.toArray(new String[0]);
+	}
+	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#toString()
+	 */
+	@Override
 	public String toString() {
 		int padding = this.getPadding();
 		int size = this.getLineSize();
 		String res = "";
-		int lines = this.getLinesUsed();
+		int linesLength = this.getLinesUsed();
 		char del = ' ';
 		if(this.isTopHeader) del = topHeaderMiddleDelimiter;
 		else if(this.isBottomHeader) del = bottomHeaderMiddleDelimiter;
 		else del = ' ';
+		String[] lines = this.getLines();
 		
 		char[] corners = this.getCornerDelimiters();
 		
-		for(int i = 0; i <= lines; i++) {
+		for(int i = 0; i < linesLength; i++) {
 			
 			// Start delimiter
 			if(i == 0 && this.isTopHeader) res += corners[0];
@@ -48,7 +122,7 @@ public class FormattedLine {
 			
 			// Content
 			String pagedContent = "";
-			String rawContent = this.getContent().substring(i * size, Math.min(this.getContent().length(), (size * i) + size));
+			String rawContent = lines[i];
 			if(this.getAlignment() != Alignment.CENTER) {
 				if(this.getAlignment() == Alignment.LEFT) pagedContent += rawContent;
 				if(rawContent.length() < size) {
@@ -89,91 +163,179 @@ public class FormattedLine {
 		return res;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getLinesUsed()
+	 */
+	@Override
 	public int getLinesUsed() {
-		return (int)(Math.ceil(this.getContent().length() / this.getLineSize()) / 1);
+		return this.getLines().length;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getContent()
+	 */
+	@Override
 	public String getContent() {
 		return this.content;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setContent(java.lang.String)
+	 */
+	@Override
 	public void setContent(String content) {
 		this.content = content;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getLeftDelimiter()
+	 */
+	@Override
 	public String getLeftDelimiter() {
 		return leftDelimiter;
 	} 
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setLeftDelimiter(java.lang.String)
+	 */
+	@Override
 	public void setLeftDelimiter(String leftDelimiter) {
 		this.leftDelimiter = leftDelimiter;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getRightDelimiter()
+	 */
+	@Override
 	public String getRightDelimiter() {
 		return rightDelimiter;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setRightDelimiter(java.lang.String)
+	 */
+	@Override
 	public void setRightDelimiter(String rightDelimiter) {
 		this.rightDelimiter = rightDelimiter;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getPadding()
+	 */
+	@Override
 	public int getPadding() {
 		return padding;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setPadding(int)
+	 */
+	@Override
 	public void setPadding(int padding) {
 		this.padding = padding;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getLineSize()
+	 */
+	@Override
 	public int getLineSize() {
 		return lineSize;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setLineSize(int)
+	 */
+	@Override
 	public void setLineSize(int lineSize) {
 		this.lineSize = lineSize;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setTopHeader(boolean)
+	 */
+	@Override
 	public void setTopHeader(boolean isTopHeader) {
 		this.isTopHeader = isTopHeader;
 		if(isTopHeader && this.isBottomHeader) this.isBottomHeader = false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#isTopHeader()
+	 */
+	@Override
 	public boolean isTopHeader() {
 		return this.isTopHeader;
 	}
 
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setBottomHeader(boolean)
+	 */
+	@Override
 	public void setBottomHeader(boolean isBottomHeader) {
 		this.isBottomHeader = isBottomHeader;
 		if(isBottomHeader && this.isTopHeader) this.isTopHeader = false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#isBottomHeader()
+	 */
+	@Override
 	public boolean isBottomHeader() {
 		return this.isTopHeader;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getAlignment()
+	 */
+	@Override
 	public Alignment getAlignment() {
 		return this.alignment;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setAlignment(utils.FormattedLine.Alignment)
+	 */
+	@Override
 	public void setAlignment(Alignment alignment) {
 		this.alignment = alignment;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getTopHeaderMiddleDelimiter()
+	 */
+	@Override
 	public char getTopHeaderMiddleDelimiter() {
 		return this.topHeaderMiddleDelimiter;
 	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getBottomHeaderMiddleDelimiter()
+	 */
+	@Override
 	public char getBottomHeaderMiddleDelimiter() {
 		return this.bottomHeaderMiddleDelimiter;
 	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setHeaderMiddleDelimiters(char)
+	 */
+	@Override
 	public void setHeaderMiddleDelimiters(char del) {
 		this.topHeaderMiddleDelimiter = del;
 		this.bottomHeaderMiddleDelimiter = del;
 	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setHeaderMiddleDelimiters(char, char)
+	 */
+	@Override
 	public void setHeaderMiddleDelimiters(char topDelimiter, char bottomDelimiter) {
 		this.topHeaderMiddleDelimiter = topDelimiter;
 		this.bottomHeaderMiddleDelimiter = bottomDelimiter;
 	}
 	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getCornerDelimiters()
+	 */
+	@Override
 	public char[] getCornerDelimiters() {
 		return new char[] {
 			this.topLeftDelimiter,
@@ -182,29 +344,70 @@ public class FormattedLine {
 			this.bottomRightDelimiter
 		};
 	}
-	public void setCornerDelimiters(char delimiter) {
-		this.topLeftDelimiter = delimiter;
-		this.topRightDelimiter = delimiter;
-		this.bottomLeftDelimiter = delimiter;
-		this.bottomRightDelimiter = delimiter;
-	}
-	public void setCornerDelimiters(char leftDelimiter, char rightDelimiter) {
-		this.topLeftDelimiter = leftDelimiter;
-		this.topRightDelimiter = rightDelimiter;
-		this.bottomLeftDelimiter = leftDelimiter;
-		this.bottomRightDelimiter = rightDelimiter;
-	}
-	public void setCornerDelimiters(char topLeftDelimiter, char topRightDelimiter, char bottomDelimiter) {
-		this.topLeftDelimiter = topLeftDelimiter;
-		this.topRightDelimiter = topRightDelimiter;
-		this.bottomLeftDelimiter = bottomDelimiter;
-		this.bottomRightDelimiter = bottomDelimiter;
-	}
+	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setCornerDelimiters(char, char, char, char)
+	 */
+	@Override
 	public void setCornerDelimiters(char topLeftDelimiter, char topRightDelimiter, char bottomLeftDelimiter, char bottomRightDelimiter) {
 		this.topLeftDelimiter = topLeftDelimiter;
 		this.topRightDelimiter = topRightDelimiter;
 		this.bottomLeftDelimiter = bottomLeftDelimiter;
 		this.bottomRightDelimiter = bottomRightDelimiter;
 	}
+
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setCornerDelimiters(char)
+	 */
+	@Override
+	public void setCornerDelimiters(char delimiter) {
+		this.setCornerDelimiters(delimiter, delimiter, delimiter, delimiter);
+	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setCornerDelimiters(char, char)
+	 */
+	@Override
+	public void setCornerDelimiters(char leftDelimiter, char rightDelimiter) {
+		this.setCornerDelimiters(leftDelimiter, rightDelimiter, leftDelimiter, rightDelimiter);
+	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setCornerDelimiters(char, char, char)
+	 */
+	@Override
+	public void setCornerDelimiters(char topLeftDelimiter, char topRightDelimiter, char bottomDelimiter) {
+		this.setCornerDelimiters(topLeftDelimiter, topRightDelimiter, bottomDelimiter, bottomDelimiter);
+	}
+	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#getWrapping()
+	 */
+	@Override
+	public Wrap getWrapping() {
+		return this.wrap;
+	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#setWrapping(utils.FormattedLine.Wrap)
+	 */
+	@Override
+	public void setWrapping(Wrap setting) {
+		this.wrap = setting;
+	}
+	
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#isIndented()
+	 */
+	@Override
+	public boolean isIndented() {
+		return this.indent;
+	}
+	/* (non-Javadoc)
+	 * @see utils.IFormattedLine#indent(boolean)
+	 */
+	@Override
+	public void indent(boolean indent) {
+		this.indent = indent;
+	}
+	
+	
 
 }
