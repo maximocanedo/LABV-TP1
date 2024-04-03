@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import lang.Messages;
 public class SportsTicket extends Ticket implements ISportsTicket {
 
 	private String sportName;
-	private List<String> equipment;
+	private List<String> equipment = new ArrayList<String>();
 	private Sport sport;
 	private SportClassification classification;
 
