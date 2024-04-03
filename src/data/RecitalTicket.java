@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import data.interfaces.IRecitalTicket;
+import lang.Messages;
 
 /*  Clase Recital que representa a Ticket de tipo Recital
  *  @author pato
@@ -47,9 +48,11 @@ public class RecitalTicket extends Ticket implements IRecitalTicket {
 
 	@Override
 	public String toString() {
-		String supportBandsString = String.join(", ", supportBands);
-		String[] additionalLines = { "Banda: " + band, "Género: " + genre,
-				"Banda/s de soporte: " + supportBandsString };
+		String supportBandsString = String.join(", ", supportBands); //$NON-NLS-1$
+		String[] additionalLines = { 
+				Messages.getString("RecitalTicket.Band") + band,  //$NON-NLS-1$
+				Messages.getString("RecitalTicket.Genre") + genre, //$NON-NLS-1$
+				Messages.getString("RecitalTicket.SupportBands") + supportBandsString }; //$NON-NLS-1$
 		return super.toString(additionalLines);
 	}
 
