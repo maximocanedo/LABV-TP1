@@ -20,7 +20,10 @@ public class Main {
 		
 		Date[] fechas = new Date[] {
 			getDateOf(2024, 5, 5, 18, 0),
-			getDateOf(2024, 12, 6, 18, 0)
+			getDateOf(2024, 12, 6, 18, 0),
+			getDateOf(2024, 9, 16, 16, 0),
+			getDateOf(2024, 6, 20, 19, 0),
+			getDateOf(2024, 9, 5, 10, 0),
 		};
 	
 		Ticket[] tickets = new Ticket[] {
@@ -30,9 +33,9 @@ public class Main {
 			// Teatro
 			new TheatreTicket("Los Auténticos", fechas[1], 136, "Comedia", teatroActoresPrincipales),
 			
-			new KidsTicket("PARQUE DE LOS NIÑOS - LA PLATA", new Date() , 300, 6, Kids.lleva_souvenir),
-			new KidsTicket("TECNOPOLIS - ALGO PARA RECORDAR", new Date() , 60, 9),
-			new KidsTicket("COCINA COMO MAMI EN CASA - NIÑOS/AS COLEGIO SAN ESTEBAN", new Date() , 30, 5)
+			new KidsTicket("PARQUE DE LOS NIÑOS - LA PLATA", fechas[2], 300, 6, Kids.lleva_souvenir),
+			new KidsTicket("TECNOPOLIS - ALGO PARA RECORDAR", fechas[3] , 60, 9),
+			new KidsTicket("COCINA COMO MAMI EN CASA - NIÑOS/AS COLEGIO SAN ESTEBAN", fechas[4], 30, 5)
 		};
 		
 		for(Ticket ticket : tickets) 
