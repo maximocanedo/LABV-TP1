@@ -9,6 +9,7 @@ import data.interfaces.IShowType;
 import data.interfaces.ITicket;
 import lang.Messages;
 import utils.FormattedLine;
+import utils.IFormattedLine;
 
 /**
  * Clase que representa una entrada de cualquier tipo
@@ -79,7 +80,7 @@ public abstract class Ticket implements ITicket {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		
 		// Cabecera del ticket
-		FormattedLine header = new FormattedLine(Messages.getString("Ticket.HEADER_TITLE"));
+		IFormattedLine header = new FormattedLine(Messages.getString("Ticket.HEADER_TITLE"));
 		header.setTopHeader(true);
 		header.setAlignment(FormattedLine.Alignment.CENTER);
 		
@@ -87,37 +88,38 @@ public abstract class Ticket implements ITicket {
 		String ticket = header.toString();
 		
 		// Línea del total
-		FormattedLine feeLine = new FormattedLine(Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()));
+		IFormattedLine feeLine = new FormattedLine(Messages.getString("Ticket.FEE_ROW") + nf.format(this.getFee()));
 		feeLine.setAlignment(FormattedLine.Alignment.RIGHT);
 		
 		// Líneas principales. Estas aparecen justo bajo la cabecera.
 		String[] principalLines = new String[] { 
-				Messages.getString("Ticket.ID_ROW") + this.getID(),
-				Messages.getString("Ticket.NAME_ROW") + this.getName(),
-				Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(),
-				Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " + Messages.getString("Ticket.MINUTES")
+			Messages.getString("Ticket.ID_ROW") + this.getID(),
+			Messages.getString("Ticket.NAME_ROW") + this.getName(),
+			Messages.getString("Ticket.TYPE_ROW") + this.getType().getName(),
+			Messages.getString("Ticket.DURATION_ROW") + this.getDuration() + " " + Messages.getString("Ticket.MINUTES")
 		};
+		String content = "";
 		for (String line : principalLines) {
-			FormattedLine dl = new FormattedLine(line);
-			ticket += dl.toString();
+			content += line + "\n";
 		}
 		
 		// Agregar líneas adicionales.
 		for (String line : additionalLines) {
 			if(line == null) continue;
-			ticket += new FormattedLine(line).toString();
+			content += line + "\n";
 		}
 		
 		// Agregar línea en blanco y línea de la tarifa.
-		ticket += FormattedLine.BLANK.toString();
+		content += "\n";
+		IFormattedLine cnt = new FormattedLine(content);
+		ticket += cnt.toString();
 		ticket += feeLine.toString();
 		
 		// Agregar footer con la fecha y hora de inicio.
-		FormattedLine end = new FormattedLine(df.format(this.getDate()));
+		IFormattedLine end = new FormattedLine(df.format(this.getDate()));
 		end.setAlignment(FormattedLine.Alignment.CENTER);
 		end.setBottomHeader(true);
 		ticket += end.toString();
-		
 		
 		return ticket;
 	}

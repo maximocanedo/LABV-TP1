@@ -78,13 +78,6 @@ public class FormattedLine implements IFormattedLine {
 			int newLineIndex = content.indexOf('\n', i);
 			int nextIndex = ((newLineIndex != -1 && newLineIndex < endIndex) ? newLineIndex : endIndex);
 			int endingIndex = (newLineIndex != -1 && newLineIndex < endIndex) ? newLineIndex : (endIndex - 1);
-			if(this.wrap == Wrap.NO_WRAP) {
-				int lastSpaceIndex = content.lastIndexOf(' ', endingIndex);
-	            if (lastSpaceIndex != -1 && lastSpaceIndex >= i) {
-	                nextIndex = lastSpaceIndex + 1;
-	                endingIndex = lastSpaceIndex; 
-	            }
-			} 
 			lines.add(content.substring(i, nextIndex));
 			i = endingIndex;
 		}
